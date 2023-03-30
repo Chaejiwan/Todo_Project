@@ -1,0 +1,23 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    
+<mapper namespace="com.multicampus.dao.ISimpleBbsDAO">
+	<select id="listDao" resultType="com.multicampus.dto.SimpleBbsDTO">
+		select * from simple_bbs order by id desc
+	</select>
+	<select id="viewDao" resultType="com.multicampus.dto.SimpleBbsDTO">
+		select * from simple_bbs where id = #{0}
+	</select>
+	<!-- #{param1} ==> #{HashMap의 key} -->
+	<insert id="writeDao" parameterType="java.util.HashMap">
+		insert into simple_bbs(id, writer, title, content) values(simple_bbs_seq.nextval, #{item1}, #{item2}, #{item3})
+	</insert>
+	<delete id="deleteDao">
+		delete from simple_bbs where id = #{_id}
+	</delete>
+	<select id="articleCount" resultType="_int"> <!-- 예약된 별칭은 org.apache.ibatis.type.TypeAliasRegistry -->
+		select count(*) from simple_bbs
+	</select>
+</mapper>
